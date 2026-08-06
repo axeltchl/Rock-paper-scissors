@@ -1,1 +1,1 @@
-*Simple Rock paper scissors in Javascript language*
+**Simple Rock paper scissors game in Javascript language**
