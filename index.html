@@ -3,134 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js" defer></script>
     <title>Rock paper scissors game</title>
   </head>
   <body>
     <h1>Rock paper scissors game</h1>
-    <p>Look results in the console</p>
+    <!-- Buttons of choices -->
+    <h2>Choose a option</h2>
+    <button id="rock" value="rock">Rock</button>
+    <button id="paper" value="paper">Paper</button>
+    <button id="scissors" value="scissors">scissors</button>
 
-    <!-- Code javascript -->
-
-    <script>
-      console.log("Connected !");
-
-      const choices = ["rock", "paper", "scissors"];
-
-      // I. sult from getComputerChoice
-
-      function getComputerChoice() {
-        /***
-          the comuter makes a random choice between scissor, paper and rock
-          We need to use the function Math.random which return a number between 0 and 1
-          it's not absolutly necessary to use array
-          ***/
-        return choices[Math.floor(Math.random() * 3)];
-      }
-
-      // II. Then we get the choice of the gamer
-      function getHumanChoice() {
-        // The gamer enters his choice
-        // We need to handle invalid inputs
-
-        while (true) {
-          let userInput = prompt(
-            "Entrer une option : rock, paper, scissors",
-            "",
-          ).toLowerCase();
-
-          // 1. Empty entry
-          if (userInput === null || userInput.trim() === "") {
-            alert("You have entered nothing. Try again please");
-            continue;
-          }
-          // 2. We compare userInput with the elements of the array 'choices'
-          if (choices.includes(userInput)) {
-            return userInput;
-          }
-
-          // 3. We verify whether the entered string is included in one of the elements of the array or not
-          let foundEntry = choices.find((choice) => {
-            return choice.includes(userInput);
-          });
-          if (foundEntry) {
-            alert(`Did you want to say "${foundEntry}" ? We take it`);
-            return foundEntry;
-          }
-
-          // 4. Otherwise we alert the gamer
-          alert(
-            `${userInput} is not valid. Valid choices : ${choices.join(",")}`,
-          );
-        }
-      }
-
-      console.log("Getters okay !");
-
-      // III. a founction to play a round
-
-      function playRound(humanChoice, computerChoice) {
-        if (
-          (humanChoice === "rock" && computerChoice === "paper") ||
-          (humanChoice === "paper" && computerChoice === "scissors") ||
-          (humanChoice === "scissors" && computerChoice === "rock")
-        ) {
-
-          console.log(
-            `You lost. The ${computerChoice} beats the ${humanChoice}`,
-          );
-
-          return -1;
-        } else if (humanChoice === computerChoice) {
-          console.log(`Equality !`);
-          return 0
-        } else {
-          console.log(
-            `You won. The ${humanChoice} beats the ${computerChoice}`,
-          );
-          return 1;
-        }
-      }
-
-      console.log(`Function playround okay`);
-      
-
-      // IV. a function to play 5 round complete and announce the winner
-
-      function playGame() {
-        let humanScore = 0;
-        let computerScore = 0;
-
-        for (let i = 0; i < 5; i++) {
-        console.log(`Round ${i + 1}`);
-          const humanChoice = getHumanChoice();
-          const computerChoice = getComputerChoice();
-          const currentResult = playRound(humanChoice, computerChoice);
-          if(currentResult === -1) {computerScore++;}
-          if(currentResult === 1) {humanScore++;}
-        }
-
-        if (humanScore === computerScore) {
-           console.log(`
-                User : ${humanScore}
-                Computer : ${computerScore}
-                Result : Equality
-            `);
-        }else if(humanScore < computerScore){
-             console.log(`
-                User : ${humanScore}
-                Computer : ${computerScore}
-                Result : Computer win
-            `);
-        }else{
-             console.log(`
-                User : ${humanScore}
-                Computer : ${computerScore}
-                Result : User win !!!
-            `);
-        }
-      }
-
-      playGame();
-    </script>
+    <div id="printResult"></div>
+    <button id="resetBtn">Recommencer</button>
   </body>
 </html>
